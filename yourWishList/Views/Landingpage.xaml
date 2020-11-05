@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             NavigationPage.HasNavigationBar="False"
+             xmlns:vm="clr-namespace:yourWishList.ViewModels"
+             x:Class="yourWishList.Views.Landingpage">
+
+    <!-- Binds the xaml markup with the context inside the LandingpageViewModel -->
+    <ContentPage.BindingContext>
+        <vm:LandingpageViewModel />
+    </ContentPage.BindingContext>
+
+    <Grid Padding="30" BackgroundColor="#fdfdff" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid Padding="0,10" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+            <StackLayout Spacing="20" HorizontalOptions="Start" VerticalOptions="Center">        
+                <ImageButton Source="add.png"
+                       Aspect="AspectFit" HorizontalOptions="Center" WidthRequest="40" Padding="10"/>
+                <ImageButton Source="user.png"
+                       Aspect="AspectFit" HorizontalOptions="Center" WidthRequest="40" Padding="10"/>
+            </StackLayout>
+            <StackLayout Spacing="0" HorizontalOptions="Center" VerticalOptions="Center">
+                <Label Text="MAKE A" TextColor="black" Opacity="0.5" FontFamily="lightFont" FontSize="20" HorizontalOptions="Center"/>
+                <Label Text="WISH" Margin="0,-5,0,0" TextColor="black" FontFamily="ThemeFont" FontSize="50" 
+                       HorizontalOptions="Center"/>
+               
+            </StackLayout>
+        </Grid>
+        <CollectionView x:Name="yourWishList" Margin="0,40,0,0" Grid.Row="1" ItemsSource="{Binding Wishes}" SelectionMode="Single" 
+                        SelectedItem="{Binding SelectedWish}" VerticalScrollBarVisibility="Never" 
+                        SelectionChangedCommand="{Binding SelectionCommand}">
+            <CollectionView.ItemsLayout>
+                <GridItemsLayout Orientation="Vertical" VerticalItemSpacing="20" HorizontalItemSpacing="20" Span="2"/>
+            </CollectionView.ItemsLayout>
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Frame BackgroundColor="#fdfdff" Padding="10" BorderColor="#bfc0c0" WidthRequest="145" HeightRequest="160">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Image Aspect="AspectFill" Source="{Binding Image}" Margin="10" WidthRequest="125" HeightRequest="110" 
+                                   HorizontalOptions="Center" VerticalOptions="Center"/>
+                            <Label Grid.Row="1" Text="{Binding Name}" FontAttributes="Bold" TextColor="#fca311" 
+                                   VerticalOptions="End" HorizontalOptions="Start"/>
+                            <Label Grid.Row="1" Text="{Binding Price, StringFormat='{0} kr'}" TextColor="black" 
+                                   VerticalOptions="End" HorizontalOptions="End"/>
+                        </Grid>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+
+            <!-- Keeps the last two whishes (boxes) to not adjust the height after what is left to the bottom -->
+            <CollectionView.Footer>
+                <Grid HeightRequest="0"/>
+            </CollectionView.Footer>
+        </CollectionView>
+    </Grid>
+</ContentPage>
