@@ -1,11 +1,19 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Windows.Input;
+using Xamarin.Forms;
 using yourWishList.Models;
+using yourWishList.Views;
 
 namespace yourWishList.ViewModels
 {
     public class DetailsViewModel : BaseViewModel
     {
+        public DetailsViewModel()
+        {
+            GoBackCommand = new Command(goBack);
+        }
+
         ObservableCollection<Wish> wishes;
         public ObservableCollection<Wish> Wishes
         {
@@ -49,6 +57,13 @@ namespace yourWishList.ViewModels
             }
         }
 
+        public ICommand GoBackCommand { get; set; }
+        
+        public void goBack()
+        {
+            Console.WriteLine("Hello, World!");
+            Application.Current.MainPage = new NavigationPage(new Landingpage());
+        }
 
     }
 }

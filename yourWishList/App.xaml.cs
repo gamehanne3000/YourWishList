@@ -1,7 +1,9 @@
 ﻿using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using yourWishList.Views;
 
+[assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace yourWishList
 {
     public partial class App : Application
@@ -9,8 +11,7 @@ namespace yourWishList
         public App()
         {
             InitializeComponent();
-
-            MainPage = new Views.Landingpage();
+            MainPage = new NavigationPage(new Landingpage());
         }
 
         protected override void OnStart()
