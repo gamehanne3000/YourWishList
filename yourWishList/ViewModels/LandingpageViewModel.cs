@@ -36,19 +36,25 @@ namespace yourWishList.ViewModels
         }
 
         // display in a new page the details about the given wish selected by the user
-        public ICommand selectionCommand => new Command(DisplayAWish);
+        public ICommand SelectionCommand => new Command(DisplayAWish);
 
         private void DisplayAWish()
         {
+                Console.WriteLine("item picked");
             if (selectedWish != null)
             {
                 // Sending the properties to the DetailsViewModel and pushing it to the bindingcontext on the "details" Page
                 var viewModel = new DetailsViewModel { SelectedWish = selectedWish, Wishes = wishes, Position = wishes.IndexOf(selectedWish) };
-                var detailsPage = new DetailsPage { BindingContext = viewModel };
+                var detailsPage = new DetailsPage();
+                detailsPage.BindingContext = viewModel;
 
                 // navigate to the details page
                 var navigation = Application.Current.MainPage as NavigationPage;
                 navigation.PushAsync(detailsPage, true);
+
+                //await Application.Current.MainPage.Navigation.PushAsync(detailsPage);
+
+                selectedWish = null;
             }
         }
 
@@ -66,3 +72,4 @@ namespace yourWishList.ViewModels
         }
     }
 }
+
