@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
+using Rg.Plugins.Popup.Services;
 using Xamarin.Forms;
 using yourWishList.Models;
 using yourWishList.Views;
@@ -12,8 +13,9 @@ namespace yourWishList.ViewModels
         public LandingpageViewModel()
         {
             wishes = GetWishes();
+            GoToModalAddWishCommand = new Command(goToModalAddWish);
         }
-        private ObservableCollection<Wish> wishes; 
+        private ObservableCollection<Wish> wishes;
         public ObservableCollection<Wish> Wishes
         {
             get { return wishes; }
@@ -40,7 +42,6 @@ namespace yourWishList.ViewModels
 
         private void DisplayAWish()
         {
-                Console.WriteLine("item picked");
             if (selectedWish != null)
             {
                 // Sending the properties to the DetailsViewModel and pushing it to the bindingcontext on the "details" Page
@@ -69,6 +70,23 @@ namespace yourWishList.ViewModels
                 new Wish { Name = "Hörlurar", Price = 2090f, Image = "earphones.png", Description = "Corsair Virtuoso RGB trådlöst headset gaming"},
                 new Wish { Name = "Gaming mus", Price = 599f, Image = "gamingMouse.png", Description = "Corsair Ironclaw RGB gamingmus (svart)"}
             };
+        }
+
+        public ICommand GoToModalAddWishCommand { get; set; }
+
+        public INavigation Navigation { get; set; }
+
+        private void goToModalAddWish()
+        {
+            /*
+             From Docs: there is no concept of performing modal stack manipulation, or popping to the root page in modal navigation.
+             Which means that a "NavigationPage" instance is not required for performing modal page navigation.
+
+            => This leads me to go for "Modalstack" instead of "NavigationPage" as it spawns a new navigation stack and shows
+                pages on top of everything else (hence modal)
+             */
+
+            PopupNavigation.Instance.PushAsync(new Modal());
         }
     }
 }

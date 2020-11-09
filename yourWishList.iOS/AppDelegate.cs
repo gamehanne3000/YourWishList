@@ -22,6 +22,9 @@ namespace yourWishList.iOS
         //
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
+            // implementing Rg.Plugins for IOS
+            Rg.Plugins.Popup.Popup.Init();
+
             global::Xamarin.Forms.Forms.Init();
             LoadApplication(new App());
 
