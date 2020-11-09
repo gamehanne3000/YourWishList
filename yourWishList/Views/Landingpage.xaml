@@ -9,6 +9,7 @@
     <ContentPage.BindingContext>
         <vm:LandingpageViewModel />
     </ContentPage.BindingContext>
+
         <StackLayout>
             <Grid Padding="30" BackgroundColor="#fdfdff" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
                 <Grid.RowDefinitions>
@@ -21,7 +22,8 @@
                                  Aspect="AspectFit"
                                  HorizontalOptions="Center"
                                  WidthRequest="40"
-                                 Padding="10"/>
+                                 Padding="10"
+                                 Command="{Binding GoToModalAddWishCommand}"/>
 
                     <ImageButton Source="user.png"
                                  Aspect="AspectFit"

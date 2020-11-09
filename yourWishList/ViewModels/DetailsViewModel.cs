@@ -61,7 +61,6 @@ namespace yourWishList.ViewModels
         
         public void goBack()
         {
-            Console.WriteLine("Hello, World!");
             Application.Current.MainPage = new NavigationPage(new Landingpage());
         }
 

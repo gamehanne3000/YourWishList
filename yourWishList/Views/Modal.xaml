@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<pages:PopupPage xmlns="http://xamarin.com/schemas/2014/forms"
+        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+        xmlns:local="clr-namespace:yourWishList.ViewModels"
+        xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
+        x:Class="yourWishList.Views.Modal">
+
+    <ContentPage.BindingContext>
+        <local:ModalViewModel />
+    </ContentPage.BindingContext>
+
+    
+    <StackLayout Margin="12"
+                 Padding="24"
+                 Spacing="24"
+                 BackgroundColor="White"
+                 HorizontalOptions="Center"
+                 VerticalOptions="Center">
+        <StackLayout>
+            <Label Text="Wish" /> 
+            <Entry FontSize="20"
+                   Text="1" 
+                   Placeholder="Your wish"/> <!--{Binding Name}-->
+        </StackLayout>
+
+        <StackLayout>
+            <Label Text="Price" /> 
+            <Entry FontSize="20"
+                   Text="1" 
+                   Placeholder=""/> <!--Text="{Binding NewWish.Price, StringFormat='{0} kr'}"-->
+        </StackLayout>
+
+        <StackLayout>
+            <Label Text="Image" /> 
+            <Entry FontSize="20"
+                   Text="1" 
+                   Placeholder="give an url to the image"/> <!--{Binding Image} -->
+        </StackLayout>
+
+        <StackLayout>
+            <Label Text="Url" /> 
+            <Entry FontSize="22"
+                   Text="1" 
+                   Placeholder=""/> <!--{Binding URL}-->
+        </StackLayout>
+
+        <StackLayout>
+            <Label Text="Description" /> 
+            <Entry FontSize="20"
+                   Text="1" 
+                   Placeholder="Description"/> <!--{Binding Description}-->
+        </StackLayout>
+
+        <StackLayout>
+            <Button Text="Cancel"
+                    HorizontalOptions="Start"
+                    VerticalOptions="End"/>
+            <Button Text="Create"
+                    HorizontalOptions="End"
+                    VerticalOptions="End"/>
+        </StackLayout>
+        
+    </StackLayout>
+</pages:PopupPage>
