@@ -87,10 +87,17 @@ namespace yourWishList.ViewModels
         }
 
 
+
         /*
             Navigate to PopUp modal to add a whish 
         */
         public ICommand GoToModalAddWishCommand { get; set; }
+
+
+     
+
+        public INavigation Navigation { get; set; }
+
 
         private void goToModalAddWish()
         {

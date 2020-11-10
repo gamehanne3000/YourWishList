@@ -130,4 +130,5 @@ if (selectedWish != null)
                 OnPropertyChanged();
             }
         }
-*/
+
+

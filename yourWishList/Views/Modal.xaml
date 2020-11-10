@@ -24,7 +24,7 @@
         </StackLayout>
 
         <StackLayout>
-            <Label Text="hej" /> 
+            <Label Text="Price" /> 
             <Entry FontSize="20"
                    Text="1" 
                    Placeholder=""/> <!--Text="{Binding NewWish.Price, StringFormat='{0} kr'}"-->
@@ -52,13 +52,13 @@
         </StackLayout>
 
         <StackLayout>
-            <Button Text="Cancel"
+            <Button Text="Cancel
                     Command="{Binding CancelWishCommand}"
                     HorizontalOptions="Start"
                     VerticalOptions="End"/>
             <Button Text="Create"
                     Command="{Binding CreateWishCommand}"
-                    HorizontalOptions="End"
+                    HorizontalOptions="Start"
                     VerticalOptions="End"/>
         </StackLayout>
         
