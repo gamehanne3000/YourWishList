@@ -19,12 +19,12 @@
         <StackLayout>
             <Label Text="Wish" /> 
             <Entry FontSize="20"
-                   Text="1" 
-                   Placeholder="Your wish"/> <!--{Binding Name}-->
+                   Text="{Binding Wish.Name}" 
+                   Placeholder="Your wish"/> <!---->
         </StackLayout>
 
         <StackLayout>
-            <Label Text="Price" /> 
+            <Label Text="hej" /> 
             <Entry FontSize="20"
                    Text="1" 
                    Placeholder=""/> <!--Text="{Binding NewWish.Price, StringFormat='{0} kr'}"-->
@@ -53,9 +53,11 @@
 
         <StackLayout>
             <Button Text="Cancel"
+                    Command="{Binding CancelWishCommand}"
                     HorizontalOptions="Start"
                     VerticalOptions="End"/>
             <Button Text="Create"
+                    Command="{Binding CreateWishCommand}"
                     HorizontalOptions="End"
                     VerticalOptions="End"/>
         </StackLayout>

@@ -37,6 +37,7 @@ namespace yourWishList.ViewModels
             }
         }
 
+     
         // display in a new page the details about the given wish selected by the user
         public ICommand SelectionCommand => new Command(DisplayAWish);
 
@@ -53,28 +54,43 @@ namespace yourWishList.ViewModels
                 var navigation = Application.Current.MainPage as NavigationPage;
                 navigation.PushAsync(detailsPage, true);
 
-                //await Application.Current.MainPage.Navigation.PushAsync(detailsPage);
-
                 selectedWish = null;
             }
         }
+
+        // -------------------
+
+        //public void getWish(Wish WishCollection)
+        //{
+        //    var WishCollection = 
+        //    ObservableCollection<Wish> WishCollection = new ObservableCollection<Wish> ();
+        //    WishCollection.Add(new Wish() { Name = "Skärm", Price = 4490f, Image = "display.png", Description = "Xiaomi Mi 34 curved gaming monitor" });
+
+           
+        //}
+
+        // -------------------
 
         // Creating a collection of whises 
         private ObservableCollection<Wish> GetWishes()
         {
             return new ObservableCollection<Wish>
             {
-                new Wish { Name = "Skärm", Price = 4490f, Image = "display.png", Description = "Xiaomi Mi 34 curved gaming monitor"},
-                new Wish { Name = "Dator mus", Price = 790f, Image = "mouse.png", Description = "Logitech MX Master 3 Advanced Trådlös Mus"},
-                new Wish { Name = "Tangentbord", Price = 999f, Image = "keyboard.png", Description = "Logitech MX Keys -> Trådlös / Bakgrundsbelyst"},
-                new Wish { Name = "Hörlurar", Price = 2090f, Image = "earphones.png", Description = "Corsair Virtuoso RGB trådlöst headset gaming"},
-                new Wish { Name = "Gaming mus", Price = 599f, Image = "gamingMouse.png", Description = "Corsair Ironclaw RGB gamingmus (svart)"}
+                // Display  ------------
+
+                //new Wish { Name = "Skärm", Price = 4490f, Image = "display.png", Description = "Xiaomi Mi 34 curved gaming monitor"},
+                //new Wish { Name = "Dator mus", Price = 790f, Image = "mouse.png", Description = "Logitech MX Master 3 Advanced Trådlös Mus"},
+                //new Wish { Name = "Tangentbord", Price = 999f, Image = "keyboard.png", Description = "Logitech MX Keys -> Trådlös / Bakgrundsbelyst"},
+                //new Wish { Name = "Hörlurar", Price = 2090f, Image = "earphones.png", Description = "Corsair Virtuoso RGB trådlöst headset gaming"},
+                //new Wish { Name = "Gaming mus", Price = 599f, Image = "gamingMouse.png", Description = "Corsair Ironclaw RGB gamingmus (svart)"}
             };
         }
 
-        public ICommand GoToModalAddWishCommand { get; set; }
 
-        public INavigation Navigation { get; set; }
+        /*
+            Navigate to PopUp modal to add a whish 
+        */
+        public ICommand GoToModalAddWishCommand { get; set; }
 
         private void goToModalAddWish()
         {
