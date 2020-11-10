@@ -19,8 +19,8 @@
         <StackLayout>
             <Label Text="Wish" /> 
             <Entry FontSize="20"
-                   Text="1" 
-                   Placeholder="Your wish"/> <!--{Binding Name}-->
+                   Text="{Binding Wish.Name}" 
+                   Placeholder="Your wish"/> <!---->
         </StackLayout>
 
         <StackLayout>
@@ -52,11 +52,13 @@
         </StackLayout>
 
         <StackLayout>
-            <Button Text="Cancel"
+            <Button Text="Cancel
+                    Command="{Binding CancelWishCommand}"
                     HorizontalOptions="Start"
                     VerticalOptions="End"/>
             <Button Text="Create"
-                    HorizontalOptions="End"
+                    Command="{Binding CreateWishCommand}"
+                    HorizontalOptions="Start"
                     VerticalOptions="End"/>
         </StackLayout>
         
