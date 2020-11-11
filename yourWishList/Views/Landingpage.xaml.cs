@@ -12,18 +12,13 @@ namespace yourWishList.Views
     {
         public Landingpage()
         {
-            InitializeComponent();
+           
         }
 
-        // Create a property of the type "Wish" inside ObservableCollection
-        public ObservableCollection<Wish> allWihises { get; set; }
-
-        // when .....
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            allWihises = new ObservableCollection<Wish>(Database.Get());
-            CollectionOfWhishes.ItemsSource = allWihises;
+            ((LandingpageViewModel)BindingContext).RefeshDataForCollectionOfWhises();
         }
     }
 }

@@ -52,10 +52,11 @@
         </StackLayout>
 
         <StackLayout>
-            <Button Text="Cancel
+            <Button Text="Cancel"
                     Command="{Binding CancelWishCommand}"
                     HorizontalOptions="Start"
                     VerticalOptions="End"/>
+
             <Button Text="Create"
                     Command="{Binding CreateWishCommand}"
                     HorizontalOptions="Start"

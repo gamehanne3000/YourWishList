@@ -4,6 +4,7 @@ using System.Windows.Input;
 using Rg.Plugins.Popup.Services;
 using Xamarin.Forms;
 using yourWishList.Models;
+using yourWishList.Services;
 using yourWishList.Views;
 
 namespace yourWishList.ViewModels
@@ -86,18 +87,18 @@ namespace yourWishList.ViewModels
             };
         }
 
+        Database DB = new Database();
+        public void RefeshDataForCollectionOfWhises()
+        {
+            
+            Console.WriteLine("DB");
+        }
 
 
         /*
             Navigate to PopUp modal to add a whish 
         */
         public ICommand GoToModalAddWishCommand { get; set; }
-
-
-     
-
-        public INavigation Navigation { get; set; }
-
 
         private void goToModalAddWish()
         {
