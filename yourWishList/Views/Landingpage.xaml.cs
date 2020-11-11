@@ -12,7 +12,13 @@ namespace yourWishList.Views
     {
         public Landingpage()
         {
-            InitializeComponent();
+           
+        }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            ((LandingpageViewModel)BindingContext).RefeshDataForCollectionOfWhises();
         }
 
         // Create a property of the type "Wish" inside ObservableCollection

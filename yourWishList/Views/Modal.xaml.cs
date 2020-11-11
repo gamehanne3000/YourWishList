@@ -9,7 +9,7 @@ namespace yourWishList.Views
     {
         public Modal()
         {
-            InitializeComponent();
+            
         }
     }
 }
