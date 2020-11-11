@@ -89,11 +89,9 @@ namespace yourWishList.ViewModels
 
         Database DB = new Database();
         public void RefeshDataForCollectionOfWhises()
-        {
-            
+        {            
             Console.WriteLine("DB");
         }
-
 
         /*
             Navigate to PopUp modal to add a whish 

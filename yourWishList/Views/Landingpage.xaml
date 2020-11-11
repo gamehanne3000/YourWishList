@@ -48,18 +48,7 @@
                 </StackLayout>
             </Grid>
 
-                <!-- test -->
-                <CollectionView>
-                    <CollectionView.ItemTemplate>
-                        <DataTemplate>
-                            <Label Text="{Binding Name}"></Label>
-                        </DataTemplate>
-                    </CollectionView.ItemTemplate>
-                </CollectionView>
-                <!-- test -->
-
                 <CollectionView Margin="0,40,0,0" Grid.Row="1" SelectionMode="Single" VerticalScrollBarVisibility="Never"
-                            
                             ItemsSource="{Binding Wishes}" 
                             SelectedItem="{Binding SelectedWish}" 
                             SelectionChangedCommand="{Binding SelectionCommand}">
