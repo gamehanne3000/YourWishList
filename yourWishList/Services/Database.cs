@@ -10,7 +10,6 @@ namespace yourWishList.Services
 {
     public class Database
     {
-       
         // Connection with Firebase
         FirebaseClient Firebase = new FirebaseClient("https://wishlist-cfb5f.firebaseio.com/");
 
@@ -48,7 +47,6 @@ namespace yourWishList.Services
         // Read
         public async Task<Wish> GetWish(Guid wishId)
         {
-           
             {
                 var wish = await GetAllWhises();
                 await Firebase
@@ -56,37 +54,34 @@ namespace yourWishList.Services
                 .OnceAsync<Wish>();
                 return wish.Where(a => a.WishId == wishId).FirstOrDefault();
             }
-           
         }
 
         // Insert a wish
-        public async Task<bool> AddWish(Guid wishId, string name, string price, string image, string url, string description)
+        public async Task AddWish(Guid wishId, string name, int price, string image, string url, string description)
         {
             try
             {
-                await Firebase
+                await firebase
                 .Child("Wishes")
                 .PostAsync(new Wish() { WishId = wishId, Name = name, Price = price, Image = image, Url = url, Description = description });
-                return true;
             }
             catch (Exception e)
             {
                 Console.WriteLine($" INSERT -> Error:{e}");
-                return false;
             }
         }
 
 
-        public async Task UpdateWish(Guid wishId, string name, string price, string image, string url, string description)
         // Update 
+        public async Task UpdateWish(Guid wishId, string name, int price, string image, string url, string description)
         {
             try
             {
-                var toUpdateWish = (await Firebase
+                var toUpdateWish = (await firebase
                 .Child("Wishes")
                 .OnceAsync<Wish>()).Where(a => a.Object.WishId == wishId).FirstOrDefault();
 
-                await Firebase
+                await firebase
                 .Child("Wishes")
                 .Child(toUpdateWish.Key)
                 .PutAsync(new Wish() { WishId = wishId, Name = name, Price = price, Image = image, Url = url, Description = description });
@@ -102,10 +97,10 @@ namespace yourWishList.Services
         {
             try
             {
-                var toDeletWish = (await Firebase
+                var toDeletWish = (await firebase
                 .Child("Whises")
                 .OnceAsync<Wish>()).Where(a => a.Object.WishId == wishId).FirstOrDefault();
-                await Firebase.Child("Wishes").Child(toDeletWish.Key).DeleteAsync();
+                await firebase.Child("Wishes").Child(toDeletWish.Key).DeleteAsync();
             }
             catch (Exception e)
             {
@@ -135,3 +130,4 @@ namespace yourWishList.Services
         Console.WriteLine("Phone: " + selectedWish.Description);
     }
 */
+

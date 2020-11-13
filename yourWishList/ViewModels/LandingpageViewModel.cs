@@ -130,6 +130,7 @@ namespace yourWishList.ViewModels
         /*
            Everytime that the landingPage is at the top of the view stack -> RELOAD with this information 
         */
+
         public void RefeshDataForCollectionOfWhises()
         {
             Console.WriteLine("refreshing the collectionView");
