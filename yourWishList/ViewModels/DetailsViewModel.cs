@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Windows.Input;
 using Xamarin.Forms;
 using yourWishList.Models;
@@ -11,7 +10,7 @@ namespace yourWishList.ViewModels
     {
         public DetailsViewModel()
         {
-            GoBackCommand = new Command(goBack);
+            GoBackCommand = new Command(GoBack);
         }
 
         ObservableCollection<Wish> wishes;
@@ -19,10 +18,7 @@ namespace yourWishList.ViewModels
         {
             get { return wishes; }
             set
-            {
-                wishes = value;
-                OnPropertyChanged();
-            }
+            { wishes = value; OnPropertyChanged(); }
         }
 
         private Wish selectedWish;
@@ -30,10 +26,7 @@ namespace yourWishList.ViewModels
         {
             get { return selectedWish; }
             set
-            {
-                selectedWish = value;
-                OnPropertyChanged();
-            }
+            { selectedWish = value; OnPropertyChanged(); }
         }
 
         private int position;
@@ -59,7 +52,7 @@ namespace yourWishList.ViewModels
 
         public ICommand GoBackCommand { get; set; }
         
-        public void goBack()
+        public void GoBack()
         {
             Application.Current.MainPage = new NavigationPage(new Landingpage());
         }
