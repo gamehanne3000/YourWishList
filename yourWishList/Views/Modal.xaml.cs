@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using Rg.Plugins.Popup.Pages;
-using Xamarin.Forms;
+﻿using Rg.Plugins.Popup.Pages;
 
 namespace yourWishList.Views
 {
@@ -9,7 +6,7 @@ namespace yourWishList.Views
     {
         public Modal()
         {
-            
+            InitializeComponent();
         }
     }
 }

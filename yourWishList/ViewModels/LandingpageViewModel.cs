@@ -11,37 +11,60 @@ namespace yourWishList.ViewModels
 {
     public class LandingpageViewModel : BaseViewModel
     {
+        public ICommand SelectionCommand => new Command(DisplayAWish);
+        public ObservableCollection<Wish> WishCollection { get; set; }
+        public ICommand GoToModalAddWishCommand { get; set; }
+        private ObservableCollection<Wish> wishes;
+        ModalViewModel mv = new ModalViewModel();
+        Database DB = new Database();
+        private Wish selectedWish;
+
         public LandingpageViewModel()
         {
+            // For Showing purposes
             wishes = GetWishes();
-            GoToModalAddWishCommand = new Command(goToModalAddWish);
+
+            // NEW ObservableCollection
+            WishCollection = new ObservableCollection<Wish>();
+            WishCollection.CollectionChanged += WishCollection_CollectionChanged;
+
+            // Open PopUp for adding item
+            GoToModalAddWishCommand = new Command(GoToModalAddWish);
         }
-        private ObservableCollection<Wish> wishes;
+
+        /*
+            Properties 
+        */
         public ObservableCollection<Wish> Wishes
         {
             get { return wishes; }
-            set
-            {
-                wishes = value;
-                OnPropertyChanged();
-            }
+            set { wishes = value; OnPropertyChanged(); }
         }
-
-        private Wish selectedWish;
         public Wish SelectedWish
         {
             get { return selectedWish; }
-            set
-            {
-                selectedWish = value;
-                OnPropertyChanged();
-            }
+            set { selectedWish = value; OnPropertyChanged(); }
         }
 
-     
-        // display in a new page the details about the given wish selected by the user
-        public ICommand SelectionCommand => new Command(DisplayAWish);
+        // EventHandler that tracks when a new item is added in the observableCollection
+        private void WishCollection_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e){
+            {
+                // Identify that an object is added
+                if (e.NewItems != null)
+                {
+                    foreach (var item in e.NewItems)
+                    {
+                        Console.WriteLine("{0}: {1}", e.Action, item);
+                        Console.WriteLine(string.Join(", ", item));
+                    }
+                }
+            }
+        } 
 
+
+        /* 
+          Display in a new page the details about the given wish selected by the user
+        */
         private void DisplayAWish()
         {
             if (selectedWish != null)
@@ -59,55 +82,71 @@ namespace yourWishList.ViewModels
             }
         }
 
-        // -------------------
-
-        //public void getWish(Wish WishCollection)
-        //{
-        //    var WishCollection = 
-        //    ObservableCollection<Wish> WishCollection = new ObservableCollection<Wish> ();
-        //    WishCollection.Add(new Wish() { Name = "Skärm", Price = 4490f, Image = "display.png", Description = "Xiaomi Mi 34 curved gaming monitor" });
-
-           
-        //}
-
-        // -------------------
-
-        // Creating a collection of whises 
+        
+        // For Showing purposes
         private ObservableCollection<Wish> GetWishes()
         {
             return new ObservableCollection<Wish>
             {
-                // Display  ------------
-
-                //new Wish { Name = "Skärm", Price = 4490f, Image = "display.png", Description = "Xiaomi Mi 34 curved gaming monitor"},
-                //new Wish { Name = "Dator mus", Price = 790f, Image = "mouse.png", Description = "Logitech MX Master 3 Advanced Trådlös Mus"},
-                //new Wish { Name = "Tangentbord", Price = 999f, Image = "keyboard.png", Description = "Logitech MX Keys -> Trådlös / Bakgrundsbelyst"},
-                //new Wish { Name = "Hörlurar", Price = 2090f, Image = "earphones.png", Description = "Corsair Virtuoso RGB trådlöst headset gaming"},
-                //new Wish { Name = "Gaming mus", Price = 599f, Image = "gamingMouse.png", Description = "Corsair Ironclaw RGB gamingmus (svart)"}
+                new Wish {
+                    Name = "Skärm",
+                    Price = "4490",
+                    Image = "display.png",
+                    Description = "Xiaomi Mi 34 curved gaming monitor",
+                    Url = "www.yourWislist1.com"
+                },
+                new Wish {
+                    Name = "Dator mus",
+                    Price = "790",
+                    Image = "mouse.png",
+                    Description = "Logitech MX Master 3 Advanced Trådlös Mus",
+                    Url = "www.yourWislist2.com"
+                },
+                new Wish {
+                    Name = "Tangentbord",
+                    Price = "999",
+                    Image = "keyboard.png",
+                    Description = "Logitech MX Keys -> Trådlös / Bakgrundsbelyst",
+                    Url = "www.yourWislist3.com"
+                },
+                new Wish {
+                    Name = "Hörlurar",
+                    Price = "2090",
+                    Image = "earphones.png",
+                    Description = "Corsair Virtuoso RGB trådlöst headset gaming",
+                    Url = "www.yourWislist4.com"
+                },
+                new Wish {
+                    Name = "Gaming mus",
+                    Price = "599",
+                    Image = "gamingMouse.png",
+                    Description = "Corsair Ironclaw RGB gamingmus (svart)",
+                    Url = "www.yourWislist5.com"
+                }
             };
         }
 
-        Database DB = new Database();
-        public void RefeshDataForCollectionOfWhises()
-        {            
-            Console.WriteLine("DB");
-        }
 
         /*
-            Navigate to PopUp modal to add a whish 
+           Everytime that the landingPage is at the top of the view stack -> RELOAD with this information 
         */
-        public ICommand GoToModalAddWishCommand { get; set; }
-
-        private void goToModalAddWish()
+        public void RefeshDataForCollectionOfWhises()
         {
-            /*
-             From Docs: there is no concept of performing modal stack manipulation, or popping to the root page in modal navigation.
-             Which means that a "NavigationPage" instance is not required for performing modal page navigation.
+            Console.WriteLine("refreshing the collectionView");
+            mv.GetDataFromDB();
+                        
+            foreach (var items in WishCollection)
+            {
+                Console.WriteLine(items);
+            }
+        } 
 
-            => This leads me to go for "Modalstack" instead of "NavigationPage" as it spawns a new navigation stack and shows
-                pages on top of everything else (hence modal)
-             */
 
+        /*
+            Navigate to PopUp modal  
+        */
+        private void GoToModalAddWish()
+        {
             PopupNavigation.Instance.PushAsync(new Modal());
         }
     }

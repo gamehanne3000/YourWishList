@@ -40,27 +40,33 @@
                         <StackLayout Spacing="0" HorizontalOptions="Center" VerticalOptions="Start">
                             <Label Text="{Binding SelectedWish.Price, StringFormat='{0} kr'}"
                                    TextColor="black" 
-                                   FontFamily="ThemeFont" FontSize="50"
+                                   FontSize="50"
                                    HorizontalOptions="Center"/>
+                             <Label Text="{Binding SelectedWish.Url}"
+                                   TextColor="#F9B522"
+                                   WidthRequest="250" 
+                                   FontSize="16"
+                                   HorizontalOptions="Center"
+                                   HorizontalTextAlignment="Center"/>
                             <Image Source="{Binding SelectedWish.Image}" Aspect="AspectFit" HorizontalOptions="Center"/>
                         </StackLayout>
                 
                         <StackLayout Grid.Row="2" Spacing="5" HorizontalOptions="FillAndExpand">
                             <Label Text="{Binding SelectedWish.Name}"
                                    TextColor="Black" 
-                                   FontFamily="ThemeFont"
                                    FontSize="25"
                                    HorizontalOptions="End"/>
 
                             <BoxView BackgroundColor="#F9B522"
-                                     HeightRequest="4" WidthRequest="75"
-                                     VerticalOptions="Start" Margin="5"
+                                     HeightRequest="4"
+                                     WidthRequest="75"
+                                     Margin="5"
+                                     VerticalOptions="Start"
                                      HorizontalOptions="End"/>
 
                             <Label Text="{Binding SelectedWish.Description}"
                                    TextColor="Black"
                                    WidthRequest="250" 
-                                   FontFamily="LightFont"
                                    FontSize="12"
                                    HorizontalOptions="End"
                                    HorizontalTextAlignment="End"/>

@@ -10,45 +10,41 @@
     </ContentPage.BindingContext>
 
     
-    <StackLayout Margin="12"
+    <StackLayout Margin="22"
                  Padding="24"
-                 Spacing="24"
-                 BackgroundColor="White"
+                 Spacing="10"
+                 WidthRequest="230"
+                 BackgroundColor="Orange"
                  HorizontalOptions="Center"
                  VerticalOptions="Center">
         <StackLayout>
-            <Label Text="Wish" /> 
+            <Label Text="Wish" FontSize="21"/> 
             <Entry FontSize="20"
-                   Text="{Binding Wish.Name}" 
-                   Placeholder="Your wish"/> <!---->
+                   Text="{Binding Wish.Name}" /> 
         </StackLayout>
 
         <StackLayout>
-            <Label Text="Price" /> 
+            <Label Text="Price" FontSize="21"/> 
             <Entry FontSize="20"
-                   Text="1" 
-                   Placeholder=""/> <!--Text="{Binding NewWish.Price, StringFormat='{0} kr'}"-->
+                   Text="{Binding Wish.Price, StringFormat='{0} kr'}" /> 
         </StackLayout>
 
         <StackLayout>
-            <Label Text="Image" /> 
+            <Label Text="Image" FontSize="21"/> 
             <Entry FontSize="20"
-                   Text="1" 
-                   Placeholder="give an url to the image"/> <!--{Binding Image} -->
+                   Text="{Binding Wish.Image}" />
         </StackLayout>
 
         <StackLayout>
-            <Label Text="Url" /> 
-            <Entry FontSize="22"
-                   Text="1" 
-                   Placeholder=""/> <!--{Binding URL}-->
+            <Label Text="Url" FontSize="21"/> 
+            <Entry FontSize="20"
+                   Text="{Binding Wish.URL}" /> 
         </StackLayout>
 
         <StackLayout>
-            <Label Text="Description" /> 
+            <Label Text="Description" FontSize="21"/> 
             <Entry FontSize="20"
-                   Text="1" 
-                   Placeholder="Description"/> <!--{Binding Description}-->
+                   Text="{Binding Wish.Description}" /> 
         </StackLayout>
 
         <StackLayout>
