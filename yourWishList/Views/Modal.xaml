@@ -38,7 +38,7 @@
         <StackLayout>
             <Label Text="Url" FontSize="21"/> 
             <Entry FontSize="20"
-                   Text="{Binding Wish.URL}" /> 
+                   Text="{Binding Wish.Url}" /> 
         </StackLayout>
 
         <StackLayout>
