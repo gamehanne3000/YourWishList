@@ -10,7 +10,7 @@ using System.Collections.ObjectModel;
 
 namespace yourWishList.ViewModels
 {
-    public class ModalViewModel :BaseViewModel
+    public class ModalViewModel : BaseViewModel
     {
         Database DB = new Database();
         public ICommand CancelWishCommand { get; set; }
@@ -26,7 +26,7 @@ namespace yourWishList.ViewModels
         /*
             Properties 
         */
-       
+
         private Wish wish;
         public Wish Wish
         {
@@ -41,8 +41,7 @@ namespace yourWishList.ViewModels
         */
         public async void AddDatToDB()
         {
-            // Calling Firebase to insert the data   
-            await DB.AddWish(wish.Name, wish.Price, wish.Image, wish.Url, wish.Description);
+            var succes = await DB.AddWish(wish.Name, wish.Price, wish.Image, wish.Url, wish.Description);
             Collection.Add(wish);
         }
 

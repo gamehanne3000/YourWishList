@@ -22,11 +22,10 @@ namespace yourWishList.ViewModels
         {
             GoToModalAddWishCommand = new Command(GoToModalAddWish);
             _mywishCollection = new ObservableCollection<Wish>();
-            
         }
-        
-        private ObservableCollection<Wish> _mywishCollection; 
-        public ObservableCollection<Wish> MyWishCollection 
+
+        private ObservableCollection<Wish> _mywishCollection;
+        public ObservableCollection<Wish> MyWishCollection
         {
             get { return _mywishCollection; }
             set { _mywishCollection = value; OnPropertyChanged(); }
@@ -37,7 +36,7 @@ namespace yourWishList.ViewModels
             get { return _selectedWish; }
             set { _selectedWish = value; OnPropertyChanged(); }
         }
-     
+
 
         /* 
           Display in a new page the details about the given wish selected by the user
@@ -65,13 +64,13 @@ namespace yourWishList.ViewModels
 
         public async void RefeshDataForCollectionOfWhises()
         {
-            
+            _mywishCollection.Clear();
             foreach (var item in await DB.GetAllWhises())
             {
-                Console.WriteLine("i am inside");
                 MyWishCollection.Add(item);
+                Console.WriteLine("i am inside");
             }
-        } 
+        }
 
 
         /*
@@ -81,93 +80,9 @@ namespace yourWishList.ViewModels
         {
             PopupNavigation.Instance.Popped += (sender, args) =>
             {
-
                 RefeshDataForCollectionOfWhises();
             };
             PopupNavigation.Instance.PushAsync(new Modal(MyWishCollection));
         }
     }
 }
-
-
-
-
-
-
-
-/*
-
- private ObservableCollection<Wish> wishes;
-
- wishes = GetWishes();
-
-
-
- // For Showing purposes
-        private ObservableCollection<Wish> GetWishes()
-        {
-            return new ObservableCollection<Wish>
-            {
-                new Wish {
-                    Name = "Skärm",
-                    Price = "4490",
-                    Image = "display.png",
-                    Description = "Xiaomi Mi 34 curved gaming monitor",
-                    Url = "www.yourWislist1.com"
-                },
-                new Wish {
-                    Name = "Dator mus",
-                    Price = "790",
-                    Image = "mouse.png",
-                    Description = "Logitech MX Master 3 Advanced Trådlös Mus",
-                    Url = "www.yourWislist2.com"
-                },
-                new Wish {
-                    Name = "Tangentbord",
-                    Price = "999",
-                    Image = "keyboard.png",
-                    Description = "Logitech MX Keys -> Trådlös / Bakgrundsbelyst",
-                    Url = "www.yourWislist3.com"
-                },
-                new Wish {
-                    Name = "Hörlurar",
-                    Price = "2090",
-                    Image = "earphones.png",
-                    Description = "Corsair Virtuoso RGB trådlöst headset gaming",
-                    Url = "www.yourWislist4.com"
-                },
-                new Wish {
-                    Name = "Gaming mus",
-                    Price = "599",
-                    Image = "gamingMouse.png",
-                    Description = "Corsair Ironclaw RGB gamingmus (svart)",
-                    Url = "www.yourWislist5.com"
-                }
-            };
-        }
-
-        // ObservableCollection
-        WishCollection = new ObservableCollection<Wish>() ;
-        WishCollection.CollectionChanged += WishCollection_CollectionChanged;
-            
-         // EventHandler that tracks when a new item is added in the observableCollection
-        private void WishCollection_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
-        {
-            for (int i = 0; i < WishCollection.Count; i++)
-            {
-                Console.WriteLine(i);
-            }
-            {
-                // Identify that an object is added
-                if (e.NewItems != null)
-                {
-                    foreach (var item in e.NewItems)
-                        Console.WriteLine("{0}: {1}", e.Action, item);
-                        Console.WriteLine("{0}: {1}", e.Action, e.NewItems, e.NewStartingIndex);
-                    {
-                    }
-                }
-            }
-        } 
- 
- */

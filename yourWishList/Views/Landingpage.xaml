@@ -46,7 +46,6 @@
                 </StackLayout>
             </Grid>
 
-                <!-- ItemsSource="{Binding MyWishCollection}" -> funkar inte --> 
                 <CollectionView Margin="0,40,0,0" Grid.Row="1" SelectionMode="Single" VerticalScrollBarVisibility="Never"
                             ItemsSource="{Binding MyWishCollection}" 
                             SelectedItem="{Binding SelectedWish}" 
@@ -74,6 +73,13 @@
 
                                 <Label Grid.Row="1"
                                        Text="{Binding Name}"
+                                       FontAttributes="Bold"
+                                       TextColor="#fca311" 
+                                       VerticalOptions="End"
+                                       HorizontalOptions="Start"/>
+
+                                <Label Grid.Row="1"
+                                       Text="{Binding Url}"
                                        FontAttributes="Bold"
                                        TextColor="#fca311" 
                                        VerticalOptions="End"

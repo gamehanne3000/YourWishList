@@ -11,9 +11,6 @@ namespace yourWishList.Views
         {
             InitializeComponent();
             ((ModalViewModel) BindingContext).Collection = myWishCollection;
-
         }
-
-       
     }
 }
