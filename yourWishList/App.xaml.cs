@@ -1,6 +1,7 @@
 ﻿using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using yourWishList.ViewModels;
 using yourWishList.Views;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
@@ -14,10 +15,8 @@ namespace yourWishList
             MainPage = new NavigationPage(new Landingpage());
         }
 
-
-
         protected override void OnStart()
-        {
+        { 
         }
 
         protected override void OnSleep()
@@ -27,5 +26,6 @@ namespace yourWishList
         protected override void OnResume()
         {
         }
+        
     }
 }

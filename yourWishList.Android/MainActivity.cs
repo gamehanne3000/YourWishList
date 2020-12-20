@@ -1,17 +1,16 @@
 ﻿using System;
-
 using Android.App;
 using Android.Content.PM;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
 using Android.OS;
+using Android.Runtime;
+using yourWishList.ViewModels;
 
 namespace yourWishList.Droid
 {
     [Activity(Label = "yourWishList", Icon = "@mipmap/icon", Theme = "@style/MainTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation | ConfigChanges.UiMode | ConfigChanges.ScreenLayout | ConfigChanges.SmallestScreenSize)]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {
+        LandingpageViewModel landPage = new LandingpageViewModel();
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -46,5 +45,29 @@ namespace yourWishList.Droid
                 Console.WriteLine("Android back button: There are not any pages in the PopupStack");
             }
         }
+
+        // Before Activity A is destroyed, Android automatically calls OnSaveInstanceState and passes in a Bundle that we can use to store our instance state
+        protected override void OnSaveInstanceState(Bundle outState)
+        {
+
+            
+            if (outState != null)
+            {
+            Console.WriteLine("state is saved");
+            landPage.RefeshDataForCollectionOfWhises();
+            }
+
+
+
+            // always call the base implementation!
+            base.OnSaveInstanceState(outState);
+        }
+
+        protected override void OnRestoreInstanceState(Bundle savedInstanceState)
+        {
+            Console.WriteLine("state is reloaded");
+            base.OnRestoreInstanceState(savedInstanceState);
+        }
+
     }
 }

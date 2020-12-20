@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 using Rg.Plugins.Popup.Services;
@@ -12,78 +13,97 @@ namespace yourWishList.ViewModels
     public class LandingpageViewModel : BaseViewModel
     {
         public ICommand SelectionCommand => new Command(DisplayAWish);
-        public ObservableCollection<Wish> WishCollection { get; set; }
         public ICommand GoToModalAddWishCommand { get; set; }
-        private ObservableCollection<Wish> wishes;
-        ModalViewModel mv = new ModalViewModel();
         Database DB = new Database();
-        private Wish selectedWish;
+        private Wish _selectedWish;
+
 
         public LandingpageViewModel()
         {
-            // For Showing purposes
-            wishes = GetWishes();
-
-            // NEW ObservableCollection
-            WishCollection = new ObservableCollection<Wish>();
-            WishCollection.CollectionChanged += WishCollection_CollectionChanged;
-
-            // Open PopUp for adding item
             GoToModalAddWishCommand = new Command(GoToModalAddWish);
+            _mywishCollection = new ObservableCollection<Wish>();
+            
+        }
+        
+        private ObservableCollection<Wish> _mywishCollection; 
+        public ObservableCollection<Wish> MyWishCollection 
+        {
+            get { return _mywishCollection; }
+            set { _mywishCollection = value; OnPropertyChanged(); }
         }
 
-        /*
-            Properties 
-        */
-        public ObservableCollection<Wish> Wishes
-        {
-            get { return wishes; }
-            set { wishes = value; OnPropertyChanged(); }
-        }
         public Wish SelectedWish
         {
-            get { return selectedWish; }
-            set { selectedWish = value; OnPropertyChanged(); }
+            get { return _selectedWish; }
+            set { _selectedWish = value; OnPropertyChanged(); }
         }
-
-        // EventHandler that tracks when a new item is added in the observableCollection
-        private void WishCollection_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e){
-            {
-                // Identify that an object is added
-                if (e.NewItems != null)
-                {
-                    foreach (var item in e.NewItems)
-                    {
-                        Console.WriteLine("{0}: {1}", e.Action, item);
-                        Console.WriteLine(string.Join(", ", item));
-                    }
-                }
-            }
-        } 
-
+     
 
         /* 
           Display in a new page the details about the given wish selected by the user
         */
         private void DisplayAWish()
         {
-            if (selectedWish != null)
+            if (_selectedWish != null)
             {
                 // Sending the properties to the DetailsViewModel and pushing it to the bindingcontext on the "details" Page
-                var viewModel = new DetailsViewModel { SelectedWish = selectedWish, Wishes = wishes, Position = wishes.IndexOf(selectedWish) };
+                var viewModel = new DetailsViewModel { SelectedWish = _selectedWish, Wishes = MyWishCollection, Position = MyWishCollection.IndexOf(_selectedWish) };
                 var detailsPage = new DetailsPage();
                 detailsPage.BindingContext = viewModel;
 
                 // navigate to the details page
                 var navigation = Application.Current.MainPage as NavigationPage;
                 navigation.PushAsync(detailsPage, true);
-
-                selectedWish = null;
+                _selectedWish = null;
             }
         }
 
-        
-        // For Showing purposes
+
+        /*
+           Everytime that the landingPage is at the top of the view stack -> RELOAD with this information 
+        */
+
+        public async void RefeshDataForCollectionOfWhises()
+        {
+            
+            foreach (var item in await DB.GetAllWhises())
+            {
+                Console.WriteLine("i am inside");
+                MyWishCollection.Add(item);
+            }
+        } 
+
+
+        /*
+            Navigate to PopUp modal  
+        */
+        private void GoToModalAddWish()
+        {
+            PopupNavigation.Instance.Popped += (sender, args) =>
+            {
+
+                RefeshDataForCollectionOfWhises();
+            };
+            PopupNavigation.Instance.PushAsync(new Modal(MyWishCollection));
+        }
+    }
+}
+
+
+
+
+
+
+
+/*
+
+ private ObservableCollection<Wish> wishes;
+
+ wishes = GetWishes();
+
+
+
+ // For Showing purposes
         private ObservableCollection<Wish> GetWishes()
         {
             return new ObservableCollection<Wish>
@@ -126,30 +146,28 @@ namespace yourWishList.ViewModels
             };
         }
 
-
-        /*
-           Everytime that the landingPage is at the top of the view stack -> RELOAD with this information 
-        */
-
-        public void RefeshDataForCollectionOfWhises()
+        // ObservableCollection
+        WishCollection = new ObservableCollection<Wish>() ;
+        WishCollection.CollectionChanged += WishCollection_CollectionChanged;
+            
+         // EventHandler that tracks when a new item is added in the observableCollection
+        private void WishCollection_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
-            Console.WriteLine("refreshing the collectionView");
-            mv.GetDataFromDB();
-                        
-            foreach (var items in WishCollection)
+            for (int i = 0; i < WishCollection.Count; i++)
             {
-                Console.WriteLine(items);
+                Console.WriteLine(i);
+            }
+            {
+                // Identify that an object is added
+                if (e.NewItems != null)
+                {
+                    foreach (var item in e.NewItems)
+                        Console.WriteLine("{0}: {1}", e.Action, item);
+                        Console.WriteLine("{0}: {1}", e.Action, e.NewItems, e.NewStartingIndex);
+                    {
+                    }
+                }
             }
         } 
-
-
-        /*
-            Navigate to PopUp modal  
-        */
-        private void GoToModalAddWish()
-        {
-            PopupNavigation.Instance.PushAsync(new Modal());
-        }
-    }
-}
-
+ 
+ */

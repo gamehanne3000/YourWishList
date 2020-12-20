@@ -26,7 +26,7 @@
         <StackLayout>
             <Label Text="Price" FontSize="21"/> 
             <Entry FontSize="20"
-                   Text="{Binding Wish.Price, StringFormat='{0} kr'}" /> 
+                   Text="{Binding Wish.Price}" /> 
         </StackLayout>
 
         <StackLayout>
@@ -38,7 +38,7 @@
         <StackLayout>
             <Label Text="Url" FontSize="21"/> 
             <Entry FontSize="20"
-                   Text="{Binding Wish.URL}" /> 
+                   Text="{Binding Wish.Url}" /> 
         </StackLayout>
 
         <StackLayout>

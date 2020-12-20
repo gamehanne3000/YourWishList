@@ -46,9 +46,9 @@
                 </StackLayout>
             </Grid>
 
-                <!-- ersätt med -> ItemsSource="{Binding WishCollection}"--> 
+                <!-- ItemsSource="{Binding MyWishCollection}" -> funkar inte --> 
                 <CollectionView Margin="0,40,0,0" Grid.Row="1" SelectionMode="Single" VerticalScrollBarVisibility="Never"
-                            ItemsSource="{Binding Wishes}" 
+                            ItemsSource="{Binding MyWishCollection}" 
                             SelectedItem="{Binding SelectedWish}" 
                             SelectionChangedCommand="{Binding SelectionCommand}">
 
