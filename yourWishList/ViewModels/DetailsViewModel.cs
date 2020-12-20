@@ -54,7 +54,7 @@ namespace yourWishList.ViewModels
         
         public void GoBack()
         {
-            Application.Current.MainPage = new NavigationPage(new Landingpage());
+            Application.Current.MainPage.Navigation.PopAsync();
         }
 
     }

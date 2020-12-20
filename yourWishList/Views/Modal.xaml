@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <pages:PopupPage xmlns="http://xamarin.com/schemas/2014/forms"
         xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
         xmlns:local="clr-namespace:yourWishList.ViewModels"
@@ -26,7 +26,7 @@
         <StackLayout>
             <Label Text="Price" FontSize="21"/> 
             <Entry FontSize="20"
-                   Text="{Binding Wish.Price, StringFormat='{0} kr'}" /> 
+                   Text="{Binding Wish.Price}" /> 
         </StackLayout>
 
         <StackLayout>
@@ -38,7 +38,7 @@
         <StackLayout>
             <Label Text="Url" FontSize="21"/> 
             <Entry FontSize="20"
-                   Text="{Binding Wish.URL}" /> 
+                   Text="{Binding Wish.Url}" /> 
         </StackLayout>
 
         <StackLayout>

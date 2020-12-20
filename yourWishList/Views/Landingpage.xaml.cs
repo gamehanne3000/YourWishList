@@ -7,13 +7,7 @@ namespace yourWishList.Views
     {
         public Landingpage()
         {
-           
-        }
-
-        protected override void OnAppearing()
-        {
-            base.OnAppearing();
-            ((LandingpageViewModel)BindingContext).RefeshDataForCollectionOfWhises();
+            InitializeComponent();
         }
 
         protected override void OnAppearing()

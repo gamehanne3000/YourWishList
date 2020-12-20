@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Windows.Input;
 using Xamarin.Forms;
 using yourWishList.Models;
@@ -6,15 +6,15 @@ using yourWishList.Services;
 using yourWishList.Views;
 using Xamarin.Essentials;
 using Rg.Plugins.Popup.Services;
+using System.Collections.ObjectModel;
 
 namespace yourWishList.ViewModels
 {
-    public class ModalViewModel :BaseViewModel
+    public class ModalViewModel : BaseViewModel
     {
         Database DB = new Database();
         public ICommand CancelWishCommand { get; set; }
         public ICommand CreateWishCommand { get; set; }
-        private Wish wish;
 
         public ModalViewModel()
         {
@@ -26,52 +26,24 @@ namespace yourWishList.ViewModels
         /*
             Properties 
         */
+
+        private Wish wish;
         public Wish Wish
         {
             get { return wish; }
             set { wish = value; OnPropertyChanged(); }
         }
 
+        public ObservableCollection<Wish> Collection { get; set; }
+
         /*
-            Firebase to rescue 
+            Storage to the rescue 
         */
-        public async void AddDatToDB() 
+        public async void AddDatToDB()
         {
-            // Calling Firebase to insert the data   
-            var succes = await DB.AddWish(wish.WishId, wish.Name, wish.Price, wish.Image, wish.Url, wish.Description);
-
-            // Succeds to send data to firebase   
-            if (succes)
-            {
-                // Add a new wish to the observableCollection inside landingPageViewModel and bind the context
-                var viewModel = new LandingpageViewModel();
-                viewModel.WishCollection.Add(new Wish { WishId = wish.WishId, Name = wish.Name, Price = wish.Price, Image = wish.Image, Url = wish.Url, Description = wish.Description });
-                var landingpage = new Landingpage();
-                landingpage.BindingContext = viewModel;
-            }
-            else
-            {
-                Console.WriteLine("Fail to send data to firebase");
-            }
+            await DB.AddWish(wish.Name, wish.Price, wish.Image, wish.Url, wish.Description);
+            Collection.Add(wish);
         }
-
-
-        public async void GetDataFromDB()
-        {
-            // Check if there is data in Firebase
-             if (DB.GetAllWhises() != null)
-            {
-                // Calling Firebase to insert the data
-                await DB.GetAllWhises();
-                Console.WriteLine("congrats you have a wish");
-            }
-            else
-            {
-                Console.WriteLine("There is no data to fetch");
-            }
-            
-        }
-        
 
         /*
             Create button 
@@ -85,7 +57,7 @@ namespace yourWishList.ViewModels
             }
             else
             {
-                // Send data to Firebase
+                // Send data
                 AddDatToDB();
                 // Go back
                 PopupNavigation.Instance.PopAsync();
