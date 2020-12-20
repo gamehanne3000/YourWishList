@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Windows.Input;
 using Xamarin.Forms;
 using yourWishList.Models;
@@ -37,11 +37,11 @@ namespace yourWishList.ViewModels
         public ObservableCollection<Wish> Collection { get; set; }
 
         /*
-            Firebase to rescue 
+            Storage to the rescue 
         */
         public async void AddDatToDB()
         {
-            var succes = await DB.AddWish(wish.Name, wish.Price, wish.Image, wish.Url, wish.Description);
+            await DB.AddWish(wish.Name, wish.Price, wish.Image, wish.Url, wish.Description);
             Collection.Add(wish);
         }
 
@@ -57,7 +57,7 @@ namespace yourWishList.ViewModels
             }
             else
             {
-                // Send data to Firebase
+                // Send data
                 AddDatToDB();
                 // Go back
                 PopupNavigation.Instance.PopAsync();

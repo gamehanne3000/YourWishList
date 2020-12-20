@@ -1,4 +1,4 @@
-﻿using System.Collections.ObjectModel;
+using System.Collections.ObjectModel;
 using Rg.Plugins.Popup.Pages;
 using yourWishList.Models;
 using yourWishList.ViewModels;

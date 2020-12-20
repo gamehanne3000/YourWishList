@@ -46,6 +46,7 @@
                 </StackLayout>
             </Grid>
 
+                <!-- ersätt med -> ItemsSource="{Binding WishCollection}"--> 
                 <CollectionView Margin="0,40,0,0" Grid.Row="1" SelectionMode="Single" VerticalScrollBarVisibility="Never"
                             ItemsSource="{Binding MyWishCollection}" 
                             SelectedItem="{Binding SelectedWish}" 
